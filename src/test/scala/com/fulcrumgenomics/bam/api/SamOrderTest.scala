@@ -75,12 +75,18 @@ class SamOrderTest extends UnitSpec {
     SamOrder(header) shouldBe Some(SamOrder.Random)
 
     header.setSortOrder(SortOrder.unsorted)
-    header.setAttribute("GO", GroupOrder.query.name())
+    header.setGroupOrder(GroupOrder.query)
+    // FIXME
+    // NB: bug in htsjdk fixed here: https://github.com/samtools/htsjdk/pull/905
+    //header.setAttribute("GO", GroupOrder.query.name())
     header.setAttribute("SS", "unsorted:random-query")
     SamOrder(header) shouldBe Some(SamOrder.RandomQuery)
 
     header.setSortOrder(SortOrder.unsorted)
-    header.setAttribute("GO", GroupOrder.query.name())
+    header.setGroupOrder(GroupOrder.query)
+    // FIXME
+    // NB: bug in htsjdk fixed here: https://github.com/samtools/htsjdk/pull/905
+    //header.setAttribute("GO", GroupOrder.query.name())
     header.setAttribute("SS", "unsorted:template-coordinate")
     SamOrder(header) shouldBe Some(SamOrder.TemplateCoordinate)
   }
